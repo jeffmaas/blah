@@ -17,7 +17,7 @@ spec:
       - $values/cilium-values.yaml
   - repoURL: https://github.com/jeffmaas/blah
     targetRevision: HEAD
-    path: argocd/cilium
+    path: argocd/apps/cilium
     ref: values
   destination:
     server: https://kubernetes.default.svc
