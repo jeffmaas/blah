@@ -6,10 +6,39 @@ metadata:
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
+  project: default
+  sources:
+  - repoURL: https://helm.cilium.io
+    chart: cilium
+    targetRevision: 1.13.3
+    helm:
+      releaseName: cilium
+      valueFiles:
+      - $values/cilium-values.yaml
+  - repoURL: https://github.com/jeffmaas/blah
+    targetRevision: HEAD
+    path: argocd/cilium
+    ref: values
   destination:
     server: https://kubernetes.default.svc
-  project: default
-  source:
-    path: argocd/apps/cilium
-    repoURL: https://github.com/jeffmaas/blah
-    targetRevision: HEAD
+    namespace: kube-system
+  ignoreDifferences:
+    - group: ""
+      kind: ConfigMap
+      name: hubble-ca-cert
+      jsonPointers:
+      - /data/ca.crt
+    - group: ""
+      kind: Secret
+      name: hubble-relay-client-certs
+      jsonPointers:
+      - /data/ca.crt
+      - /data/tls.crt
+      - /data/tls.key
+    - group: ""
+      kind: Secret
+      name: hubble-server-certs
+      jsonPointers:
+      - /data/ca.crt
+      - /data/tls.crt
+      - /data/tls.key
