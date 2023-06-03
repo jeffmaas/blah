@@ -14,10 +14,9 @@ spec:
     helm:
       releaseName: cilium
       valueFiles:
-      - $values/cilium-values.yaml
+      - $values/argocd/apps/cilium/cilium-values.yaml
   - repoURL: https://github.com/jeffmaas/blah
     targetRevision: HEAD
-    path: argocd/apps/cilium
     ref: values
   destination:
     server: https://kubernetes.default.svc
