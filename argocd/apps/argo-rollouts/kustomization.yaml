@@ -5,3 +5,5 @@ namespace: argo-rollouts
 resources:
 - https://github.com/argoproj/argo-rollouts/releases/download/v1.5.1/install.yaml
 - https://github.com/argoproj/argo-rollouts/releases/download/v1.5.1/notifications-install.yaml
+patchesStrategicMerge:
+- rollouts-plugin-trafficrouter-gatewayapi.yaml
