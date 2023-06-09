@@ -13,6 +13,3 @@ spec:
     path: argocd/apps/rollouts-canary
     repoURL: https://github.com/jeffmaas/blah
     targetRevision: HEAD
-  syncPolicy:
-    syncOptions:
-    - CreateNamespace=true
