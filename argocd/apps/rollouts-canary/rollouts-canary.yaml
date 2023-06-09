@@ -77,6 +77,7 @@ spec:
         plugins:
           argoproj-labs/gatewayAPI:
             httpRoute: rollouts-canary
+            namespace: rollouts-canary
       steps:
       - setWeight: 30
       - pause: {}
