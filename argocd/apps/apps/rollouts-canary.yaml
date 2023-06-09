@@ -2,14 +2,18 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: rollouts-canary
-  namespace: rollouts-canary
+  namespace: argocd
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
     server: https://kubernetes.default.svc
+    namespace: rollouts-canary
   project: default
   source:
     path: argocd/apps/rollouts-canary
     repoURL: https://github.com/jeffmaas/blah
     targetRevision: HEAD
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
