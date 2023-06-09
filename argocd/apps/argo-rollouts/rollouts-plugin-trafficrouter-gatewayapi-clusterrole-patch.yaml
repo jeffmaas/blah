@@ -1,0 +1,11 @@
+- op: add
+  path: /rules/0
+  value:
+    apiGroups:
+      - gateway.networking.k8s.io 
+    resources:
+      - httproutes
+    verbs:
+      - watch
+      - get
+      - update

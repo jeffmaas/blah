@@ -7,3 +7,10 @@ resources:
 - https://github.com/argoproj/argo-rollouts/releases/download/v1.5.1/notifications-install.yaml
 patchesStrategicMerge:
 - rollouts-plugin-trafficrouter-gatewayapi.yaml
+patchesJson6902:
+- target:
+    group: rbac.authorization.k8s.io
+    version: v1
+    kind: ClusterRole
+    name: argo-rollouts
+  path: rollouts-plugin-trafficrouter-gatewayapi-clusterrole-patch.yaml
