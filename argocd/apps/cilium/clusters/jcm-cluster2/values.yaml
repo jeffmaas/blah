@@ -1,15 +1,18 @@
-k8sServiceHost: "192.168.1.50"
+cluster:
+  name: "jcm-cluster2"
+  id: 2
+k8sServiceHost: "192.168.1.52"
 k8sServicePort: "6443"
 bgpControlPlane:
   enabled: true
 bpf:
   masquerade: true
-  tproxy: true 
+  tproxy: true
 ingressController:
   enabled: true
   service:
     insecureNodePort: 30080
-    secureNodePort : 30443 
+    secureNodePort : 30443
 gatewayAPI:
   enabled: true
 hubble:
@@ -23,7 +26,7 @@ hubble:
     - icmp
     - http
     serviceMonitor:
-      enabled: true 
+      enabled: true
   relay:
     enabled: true
     prometheus:
