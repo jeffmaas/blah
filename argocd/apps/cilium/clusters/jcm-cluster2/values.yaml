@@ -12,7 +12,8 @@ ingressController:
   enabled: true
   service:
     insecureNodePort: 30080
-    secureNodePort : 30443
+    secureNodePort: 30443
+    type: "NodePort"
 gatewayAPI:
   enabled: true
 hubble:
