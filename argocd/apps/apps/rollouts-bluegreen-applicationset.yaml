@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: rollouts-bluegreen
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  generators:
+  - clusters:
+      selector:
+        matchLabels:
+          enabled: "yes"
+          cluster-type: "workload"
+  template:
+    metadata:
+      name: '{{name}}-rollouts-bluegreen'
+    spec:
+      destination:
+        server: '{{server}}'
+        namespace: rollouts-bluegreen
+      project: default
+      source:
+        path: argocd/apps/rollouts-bluegreen
+        repoURL: https://github.com/jeffmaas/blah
+        targetRevision: HEAD
+      syncPolicy:
+        syncOptions:
+        - CreateNamespace=true

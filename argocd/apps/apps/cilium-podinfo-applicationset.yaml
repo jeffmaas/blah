@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: cilium-podinfo
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  generators:
+  - clusters:
+      selector:
+        matchLabels:
+          enabled: "yes"
+          cluster-type: "workload"
+  template:
+    metadata:
+      name: '{{name}}-cilium-podinfo'
+    spec:
+      destination:
+        server: '{{server}}'
+        namespace: podinfo
+      project: default
+      source:
+        path: podinfo
+        repoURL: https://github.com/jeffmaas/cilium-kustomize-bases
+        targetRevision: HEAD
+      syncPolicy:
+        syncOptions:
+        - CreateNamespace=true

@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: node-local-dns
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  generators:
+  - clusters:
+      selector:
+        matchLabels:
+          enabled: "yes"
+          cluster-type: "workload"
+  template:
+    metadata:
+      name: '{{name}}-node-local-dns'
+    spec:
+      destination:
+        server: '{{server}}'
+        namespace: kube-system
+      project: default
+      source:
+        path: 'argocd/apps/node-local-dns/clusters/{{name}}'
+        repoURL: https://github.com/jeffmaas/blah
+        targetRevision: HEAD
