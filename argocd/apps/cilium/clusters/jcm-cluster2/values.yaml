@@ -3,11 +3,8 @@ cluster:
   id: 2
 k8sServiceHost: "192.168.1.52"
 k8sServicePort: "6443"
-bgpControlPlane:
-  enabled: true
 bpf:
   masquerade: true
-  tproxy: true
 ingressController:
   enabled: true
   service:
@@ -40,7 +37,7 @@ ipam:
   mode: "kubernetes"
 ipv4:
   enabled: true
-kubeProxyReplacement: "strict"
+kubeProxyReplacement: true
 loadBalancer:
   algorithm: "maglev"
 localRedirectPolicy: true
