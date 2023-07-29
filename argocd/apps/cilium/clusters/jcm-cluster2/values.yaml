@@ -31,7 +31,7 @@ ipam:
   mode: "kubernetes"
 ipv4:
   enabled: true
-kubeProxyReplacement: true
+kubeProxyReplacement: "strict"
 loadBalancer:
   algorithm: "maglev"
 localRedirectPolicy: true
