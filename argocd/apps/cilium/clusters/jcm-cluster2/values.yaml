@@ -45,3 +45,7 @@ operator:
     port: 9963
     serviceMonitor:
       enabled: true
+encryption:
+  enabled: true
+  type: wireguard
+  nodeEncryption: true
