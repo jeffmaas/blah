@@ -1,0 +1,33 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: metrics-server
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  generators:
+  - clusters:
+      selector:
+        matchLabels:
+          enabled: "yes"
+        matchExpressions:
+          - {key: metrics-server-version, operator: Exists}
+  template:
+    metadata:
+      name: '{{name}}-metrics-server'
+    spec:
+      project: default
+      sources:
+      - repoURL: https://kubernetes-sigs.github.io/metrics-server 
+        chart: metrics-server
+        targetRevision: '{{metadata.labels.metrics-server-version}}'
+        helm:
+          valueFiles:
+          - '$values/argocd/apps/metrics-server/values.yaml'
+      - repoURL: https://github.com/jeffmaas/blah
+        targetRevision: HEAD
+        ref: values
+      destination:
+        server: '{{server}}'
+        namespace: kube-system
