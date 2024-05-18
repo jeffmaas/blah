@@ -21,7 +21,7 @@ spec:
       sources:
       - repoURL: https://kubernetes-sigs.github.io/metrics-server 
         chart: metrics-server
-        targetRevision: '{{metadata.labels.metrics-server-version}}'
+        targetRevision: 3.12.1
         helm:
           valueFiles:
           - '$values/argocd/apps/metrics-server/values.yaml'
