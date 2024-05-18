@@ -25,6 +25,7 @@ spec:
         helm:
           valueFiles:
           - '$values/argocd/apps/metrics-server/values.yaml'
+          releaseName: metrics-server
       - repoURL: https://github.com/jeffmaas/blah
         targetRevision: HEAD
         ref: values
